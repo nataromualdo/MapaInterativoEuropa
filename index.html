@@ -374,7 +374,7 @@
             // Inicializar o SVG Pan Zoom
             const panZoomInstance = svgPanZoom('#map-wrapper svg', {
                 zoomEnabled: true,
-                controlIconsEnabled: false,
+                controlIconsEnabled: false, // Deixa false para usar os botões de zoom que já fizemos
                 fit: true,
                 center: true,
                 minZoom: 0.5,
@@ -616,7 +616,7 @@
                     "Mônaco": {
                         "schengen": "Não",
                         "ue": "Não",
-                        "permanencia": "Sem visto - 90 dias (segue regras da França/Schengen)",
+                        "permanencia": "Sem visto - 90 dias (segue regras da Itália/Schengen)",
                         "categoria": "cinza"
                     },
                     "Noruega": {
@@ -727,7 +727,7 @@
                     'Greece': 'Grécia',
                     'Hungary': 'Hungria',
                     'Iceland': 'Islândia',
-                    'Irlanda': 'Irlanda',
+                    'Ireland': 'Irlanda', // Garante que a chave é 'Ireland' e o valor é 'Irlanda'
                     'Italy': 'Itália',
                     'Kosovo': 'Kosovo',
                     'Latvia': 'Letônia',
@@ -759,12 +759,14 @@
                 // Aplicar cores e interatividade aos países
                 const svgElement = document.querySelector('svg');
                 if (svgElement) {
+                    // Seleciona todos os caminhos que têm ID e nome.
                     const paths = svgElement.querySelectorAll('path[id][name]');
                     
                     paths.forEach(path => {
-                        const svgName = path.getAttribute('name');
-                        const nomePT = traducoes[svgName];
+                        const svgName = path.getAttribute('name'); // Pega o atributo 'name' do SVG
+                        const nomePT = traducoes[svgName]; // Usa o 'name' para buscar a tradução
                         
+                        // Se houver uma tradução e dados para o país
                         if (nomePT && paisesData[nomePT]) {
                             const dados = paisesData[nomePT];
                             
